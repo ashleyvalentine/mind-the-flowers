@@ -1,7 +1,4 @@
 const gameParameters = {
-  width: 10,
-  flowerAmount: 20,
-  squares: [],
   bees: 0
   // isGameOver: false (maybe game state?)
 }
@@ -44,7 +41,3 @@ class Board {
     }
   }
 }
-
-let game = new Board()
-game.renderBoardSpaces()
-console.log(game.createRandomizedSpacesArray())
