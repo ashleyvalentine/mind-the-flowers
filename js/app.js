@@ -1,5 +1,5 @@
 const game = new Board()
-// const move = new Play()
+gameOver = false
 
 const board = game.createBoard()
 console.log(board)
@@ -15,6 +15,7 @@ board.forEach((tile) => {
 /*adds a bee to flag possible squares that contain flowers on right click */
 function addPollinator(event) {
   event.preventDefault()
+  if (gameOver === true) return
   const element = event.currentTarget
   if (element.classList.contains('pollinator')) {
     element.classList.remove('pollinator')
@@ -30,6 +31,7 @@ function checkSquare() {
 }
 
 function handleClick(event) {
+  if (gameOver === true) return
   const element = event.currentTarget
   const currentId = parseInt(element.id)
   const classType = element.className
@@ -37,7 +39,7 @@ function handleClick(event) {
     case 'checked':
       break
     case 'flower':
-      console.log('Game Over')
+      gameOver = true
       break
     case 'valid':
       element.classList.add('checked')
