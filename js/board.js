@@ -1,8 +1,3 @@
-const gameParameters = {
-  bees: 0
-  // isGameOver: false (maybe game state?)
-}
-
 class Board {
   constructor() {
     //constructor parameters for future width and flowerAmount to allow user to change difficulty
@@ -14,8 +9,8 @@ class Board {
     this.validSpaces = this.createSpaces('valid', this.validSpacesAmount)
   }
 
+  /*creates an array of spaces according to spaceType == 'flower' || 'valid'; length == this.flowerAmount || this.validSpacesAmount*/
   createSpaces(spaceType, length) {
-    //spaceType == 'flower' || 'valid; length == this.flowerAmount || this.validSpacesAmount
     let spaces = []
     for (let i = 0; i < length; i++) {
       spaces.push(spaceType)
@@ -23,6 +18,7 @@ class Board {
     return spaces
   }
 
+  /*takes the two arrays of valid or flower spaces, combines and randomizes them*/
   createRandomizedSpacesArray() {
     const randomizedSpaces = this.flowerSpaces
       .concat(this.validSpaces)
@@ -30,20 +26,19 @@ class Board {
     return randomizedSpaces
   }
 
-  renderBoardSpaces() {
-    const grid = document.querySelector('.grid')
+  /*returns board array filled with each tile as an object, including it's class as determined by createRandomizedSpacesArray() and a unique numerical Id*/
+  createBoard() {
     const board = []
     const randomizedSpaces = this.createRandomizedSpacesArray()
     for (let i = 0; i < this.boardSpaces; i++) {
-      const square = document.createElement('div') //I think I want to make this into an object
-      square.setAttribute('id', i)
-      square.classList.add(randomizedSpaces[i])
+      const element = document.createElement('div')
+      element.setAttribute('id', i)
+      element.classList.add(randomizedSpaces[i])
       const tile = {
-        square,
-        id: square.id,
-        class: square.className
+        element,
+        id: element.id,
+        class: element.className
       }
-      grid.appendChild(tile['square'])
       board.push(tile)
     }
     return board
