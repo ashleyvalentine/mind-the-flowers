@@ -1,7 +1,8 @@
 const game = new Board()
 const move = new Play()
 
-game.renderBoardSpaces()
+const board = game.renderBoardSpaces()
+console.log(board)
 
 const validSpace = document.querySelectorAll('.valid').forEach((space) => {
   space.addEventListener('click', move.handleClick)

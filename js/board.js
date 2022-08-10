@@ -32,12 +32,20 @@ class Board {
 
   renderBoardSpaces() {
     const grid = document.querySelector('.grid')
+    const board = []
     const randomizedSpaces = this.createRandomizedSpacesArray()
     for (let i = 0; i < this.boardSpaces; i++) {
-      const square = document.createElement('div')
+      const square = document.createElement('div') //I think I want to make this into an object
       square.setAttribute('id', i)
       square.classList.add(randomizedSpaces[i])
-      grid.appendChild(square)
+      const tile = {
+        square,
+        id: square.id,
+        class: square.className
+      }
+      grid.appendChild(tile['square'])
+      board.push(tile)
     }
+    return board
   }
 }
