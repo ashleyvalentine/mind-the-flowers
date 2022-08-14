@@ -30,16 +30,20 @@ class Board {
   createBoard() {
     const board = []
     const randomizedSpaces = this.createRandomizedSpacesArray()
-    for (let i = 0; i < this.boardSpaces; i++) {
-      const element = document.createElement('div')
-      element.setAttribute('id', i)
-      element.classList.add(randomizedSpaces[i])
-      const tile = {
-        element,
-        id: element.id,
-        class: element.className
+    for (let i = 0; i < this.width; i++) {
+      const row = []
+      board.push(row)
+      for (let j = 0; j < this.width; j++) {
+        const element = document.createElement('div')
+        element.setAttribute('id', i)
+        element.classList.add(randomizedSpaces[i])
+        const tile = {
+          element,
+          id: element.id,
+          class: element.className
+        }
+        row.push(tile)
       }
-      board.push(tile)
     }
     return board
   }

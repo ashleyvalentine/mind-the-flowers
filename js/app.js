@@ -6,10 +6,12 @@ console.log(board)
 
 const grid = document.querySelector('.grid')
 
-board.forEach((tile) => {
-  grid.appendChild(tile.element)
-  tile.element.addEventListener('click', handleClick)
-  tile.element.addEventListener('contextmenu', addPollinator)
+board.forEach((row) => {
+  row.forEach((tile) => {
+    grid.appendChild(tile.element)
+    tile.element.addEventListener('click', handleClick)
+    tile.element.addEventListener('contextmenu', addPollinator)
+  })
 })
 
 /*adds a bee to flag possible squares that contain flowers on right click */
