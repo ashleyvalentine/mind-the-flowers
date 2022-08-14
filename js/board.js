@@ -19,28 +19,47 @@ class Board {
   }
 
   /*takes the two arrays of valid or flower spaces, combines and randomizes them*/
-  createRandomizedSpacesArray() {
-    const randomizedSpaces = this.flowerSpaces
-      .concat(this.validSpaces)
-      .sort(() => Math.random() - 0.5)
-    return randomizedSpaces
+  // createRandomizedSpacesArray() {
+  //   const randomizedSpaces = this.flowerSpaces
+  //     .concat(this.validSpaces)
+  //     .sort(() => Math.random() - 0.5)
+  //   return randomizedSpaces
+  // }
+
+  //function to randomly assign flower positions
+  getFLowerPositions() {
+    const flowerPositions = []
+    let position
+    while (flowerPositions.length < this.flowerAmount) {
+      position = Math.floor(Math.random() * this.boardSpaces)
+      if (flowerPositions.indexOf(position) === -1) {
+        flowerPositions.push(position)
+      }
+    }
+    let sortedFlowerPositions = flowerPositions.sort((a, b) => a - b)
+    return sortedFlowerPositions
   }
+  //set how many flower spaces are allowed
+  //create flowerPositions array
+  //iterate how ever many times there are flower spaces
+  //create a random number each time and push it to the flowerPositions array
 
   /*returns board array filled with each tile as an object, including it's class as determined by createRandomizedSpacesArray() and a unique numerical Id*/
   createBoard() {
     const board = []
-    const randomizedSpaces = this.createRandomizedSpacesArray()
+    const flowerPositions = this.getFLowerPositions()
+    console.log(flowerPositions)
     for (let i = 0; i < this.width; i++) {
       const row = []
       board.push(row)
       for (let j = 0; j < this.width; j++) {
         const element = document.createElement('div')
         element.setAttribute('id', i)
-        element.classList.add(randomizedSpaces[i])
+        // element.classList.add(randomizedSpaces[i])
         const tile = {
           element,
-          id: element.id,
-          class: element.className
+          id: element.id
+          // class: element.className
         }
         row.push(tile)
       }
