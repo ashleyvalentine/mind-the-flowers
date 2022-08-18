@@ -35,26 +35,10 @@ function addPollinator(event) {
   }
 }
 
-function checkSquare(board, position) {
-  const nearbyTiles = []
-  x = Number(position[0])
-  y = Number(position[1])
-  for (let i = -1; i <= 1; i++) {
-    for (let j = -1; j <= 1; j++) {
-      const tile = board[x + i]?.[y + j]
-      if (tile) {
-        nearbyTiles.push(tile)
-      }
-    }
-  }
-  console.log(nearbyTiles)
-}
-
 //left click event
 function handleClick(event) {
   if (gameOver === true) return
   const element = event.currentTarget
-  console.log(element)
   const classType = element.className
   const position = element.getAttribute('position').split(',')
   switch (classType) {
@@ -62,10 +46,60 @@ function handleClick(event) {
       break
     case 'flower':
       gameOver = true
+      console.log('Game Over')
       break
     case 'valid':
-      element.classList.add('checked')
-      checkSquare(board, position)
+      checkSquare(element, position)
       break
   }
+}
+
+//checks square for surrounding tiles, flower count, then checks those squares
+function checkSquare(element, position) {
+  if (element.classList.contains('flower')) return
+  if (element.classList.contains('checked')) return
+
+  const nearByTiles = getNearByTiles(board, position)
+  const flowerCount = getFlowerCount(nearByTiles)
+
+  if (flowerCount === 0) {
+    for (tile of nearByTiles) {
+      const x = tile.x
+      const y = tile.y
+      const position = [x, y]
+      checkSquare(tile.element, position)
+      element.classList.add('checked')
+    }
+  } else {
+    element.textContent = flowerCount
+    element.classList.add('checked')
+  }
+}
+
+//create array of surrounding tiles of clicked tile
+function getNearByTiles(board, position) {
+  const nearByTiles = []
+  const x = Number(position[0])
+  const y = Number(position[1])
+  for (let i = -1; i <= 1; i++) {
+    for (let j = -1; j <= 1; j++) {
+      const tile = board[x + i]?.[y + j]
+      if (tile) {
+        nearByTiles.push(tile)
+      }
+    }
+  }
+  return nearByTiles
+}
+
+//checks nearByTiles array for how many are flower tiles
+function getFlowerCount(nearByTiles) {
+  const tiles = nearByTiles
+  let flowers = []
+  for (tile of tiles) {
+    if (tile.flower) {
+      flowers.push(tile)
+    }
+  }
+  return flowers.length
 }
