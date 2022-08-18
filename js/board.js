@@ -6,7 +6,7 @@ class Board {
     this.flowerAmount = 20
   }
 
-  //function to randomly assign flower positions
+  //randomly assigns flower positions
   getFLowerPositions() {
     const flowerPositions = []
     let position = {}
@@ -30,11 +30,10 @@ class Board {
     return flowerPositions
   }
 
-  /*returns board array filled with each tile as an object, including it's class as determined by createRandomizedSpacesArray() and a unique numerical Id*/
+  /*returns board array filled with each tile as an object with x/y coordinates and whether the space is valid or a flower*/
   createBoard() {
     const board = []
     const flowerPositions = this.getFLowerPositions()
-    console.log(flowerPositions)
     for (let x = 0; x < this.width; x++) {
       const row = []
       board.push(row)
