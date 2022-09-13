@@ -1,5 +1,5 @@
 const game = new Board()
-gameOver = false
+let gameOver = false
 
 const board = game.createBoard()
 console.log(board)
@@ -46,7 +46,7 @@ function handleClick(event) {
       break
     case 'flower':
       gameOver = true
-      console.log('Game Over')
+      revealBoard()
       break
     case 'valid':
       checkSquare(element, position)
@@ -103,3 +103,18 @@ function getFlowerCount(nearByTiles) {
   }
   return flowers.length
 }
+
+function revealBoard(board) {
+  const tiles = document.querySelectorAll('div')
+  tiles.forEach((tile) => {
+    if (tile.classList.contains('valid')) {
+      tile.textContent = ''
+      tile.style.backgroundColor = 'palegreen'
+    } else if (tile.classList.contains('flower')) {
+      tile.style.backgroundColor = 'pink'
+    }
+  })
+}
+//check for win
+//check for lose - alert of loss
+//reveal all tiles on lose
