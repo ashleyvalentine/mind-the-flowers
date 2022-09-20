@@ -1,17 +1,17 @@
 # Mind the Flowers
 
-My attempt at building my own minesweeper game. Currently in progress. 
+My attempt at building my own minesweeper game. Currently in progress.
 
-**Link to project:** 
+<!-- **Link to project:**  -->
 
-![screen shot of tic tac toe game](./game.png)
+<!-- ![screen shot of game]() -->
 
 ## How It's Made:
 
 **Tech used:** HTML, CSS, JavaScript
 
-Built using HTML, CSS, and vanilla JavaScript.
+UI built with basic HTML and CSS, game logic built with vanilla JS.
 
 ## Optimizations
 
-Adding an option to play against the computer.
+Currently working on finishing the game logic.
